@@ -63,14 +63,14 @@ function edit(element, options) {
             clearInterval(checkBlur);
             emit('pre-end-edit', element);
             var newOption = res[edit.selectedIndex];
-            element.innerHTML = newOption ? newOption.description : option.emptyText;
-            options.setValue(element, newOption ? newOption.value : option.emptyValue);
+            element.innerHTML = newOption ? newOption.description : options.emptyText;
+            options.setValue(element, newOption ? newOption.value : options.emptyValue);
             if (options.maintainSize === true) {
                 element.style.width = oldStyle.width;
                 element.style.height = oldStyle.height;
             }
             if (value != newOption.value) {
-                emit('update', element, newOption ? newOption.value : option.emptyValue);
+                emit('update', element, newOption ? newOption.value : options.emptyValue);
             }
             emit('post-end-edit', element);
         }
