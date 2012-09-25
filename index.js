@@ -4,6 +4,8 @@ var editable = require('editable');
 module.exports = makeEditable;
 function makeEditable(elements, options) {
     options = options || {};
+    options.emptyText = options.emptyText || '';
+    options.emptyValue = options.emptyValue || ''; 
     options.getValue = options.getValue || function (element) {
         return editable.attribute(element, 'value') || element.textContent.trim();
     };
@@ -43,7 +45,7 @@ function edit(element, options) {
         }).join('');
         element.appendChild(edit);
         if (options.maintainSize === true) {
-            var editDimensions = editable.transformDimensions(edit, dimensions);
+            var editDimensions = editable.transformDimensions(edit, dimensions, {padding: true, border: true});
             edit.style.width = editDimensions.width + 'px';
             edit.style.height = editDimensions.height + 'px';
             oldStyle = {width: element.style.width, height: element.style.height};
@@ -61,14 +63,14 @@ function edit(element, options) {
             clearInterval(checkBlur);
             emit('pre-end-edit', element);
             var newOption = res[edit.selectedIndex];
-            element.innerHTML = newOption.description;
-            options.setValue(element, newOption.value);
+            element.innerHTML = newOption ? newOption.description : option.emptyText;
+            options.setValue(element, newOption ? newOption.value : option.emptyValue);
             if (options.maintainSize === true) {
                 element.style.width = oldStyle.width;
                 element.style.height = oldStyle.height;
             }
             if (value != newOption.value) {
-                emit('update', element, newOption.value);
+                emit('update', element, newOption ? newOption.value : option.emptyValue);
             }
             emit('post-end-edit', element);
         }
