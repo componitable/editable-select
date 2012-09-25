@@ -1,0 +1,15 @@
+{
+  "name": "editable-select",
+  "repo": "componitable/editable-select",
+  "description": "Provides an in-line select box/drop-down when an element is clicked.",
+  "version": "0.0.1",
+  "keywords": [],
+  "dependencies": {
+    "component/emitter": "*",
+    "componitable/editable": "*"
+  },
+  "development": {},
+  "scripts": [
+    "index.js"
+  ]
+}
