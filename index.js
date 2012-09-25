@@ -69,7 +69,7 @@ function edit(element, options) {
                 element.style.width = oldStyle.width;
                 element.style.height = oldStyle.height;
             }
-            if (value != newOption.value) {
+            if (value != (newOption ? newOption.value : options.emptyValue)) {
                 emit('update', element, newOption ? newOption.value : options.emptyValue);
             }
             emit('post-end-edit', element);
